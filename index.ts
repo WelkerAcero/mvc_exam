@@ -14,6 +14,7 @@ class Server extends App {
 const ser = new Server();
 
 const obj = new ProductModel();
+
 obj.get_data("SELECT * FROM system.local");
 
 
