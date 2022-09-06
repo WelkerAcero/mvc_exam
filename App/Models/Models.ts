@@ -60,7 +60,7 @@ export abstract class Model {
     protected async set_query(): Promise<any> {
         return new Promise((resolve, rejects) => {
             this.db_connection();
-            this.connection.create.execute(this.query, [], (err: any) => {
+            this.connection.execute(this.query, [], (err: any) => {
                 if (err) {
                     console.error(err)
                     return rejects(err);
