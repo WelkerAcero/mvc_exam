@@ -63,8 +63,8 @@ export abstract class Model {
                     console.error(err)
                     return rejects(err);
                 }
-                console.log(rows)
-                console.log('Databse Connected')
+                
+                console.log('Database Connected...')
                 return resolve(rows);
             });
         });
