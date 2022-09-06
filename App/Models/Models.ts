@@ -35,27 +35,12 @@ export abstract class Model {
         return this.connection;
     }
 
-
     private async db_close(): Promise<void> {
         this.connection.shutdown();
     }
 
-    protected async get_query(): Promise<any> {
-        return new Promise((resolve, rejects) => {
-            this.db_connection()
-            this.connection.query(this.query, function (err: any, rows: any[], fields: any) {
-                if (err) {
-                    console.error(err)
-                    return rejects(err);
-                }
-                console.log(rows)
-                return resolve(rows);
-            });
-        })
 
-    }
-
-    protected async listen(): Promise<any>  {
+    protected async get_query(): Promise<any>  {
         return new Promise((resolve, rejects) => {
             this.db_connection();
             this.connection.create.execute(this.query, [], (err: any, rows: any[]) => {
@@ -67,6 +52,23 @@ export abstract class Model {
                 return resolve(rows);
             });
         });
+
+        this.db_close();
+    }
+
+    protected async set_query(): Promise<any> {
+        return new Promise((resolve, rejects) => {
+            this.db_connection();
+            this.connection.create.execute(this.query, [], (err: any) => {
+                if (err) {
+                    console.error(err)
+                    return rejects(err);
+                }
+                console.log("Connected database...")
+            });
+        });
+
+        this.db_close();
     }
 
 }
