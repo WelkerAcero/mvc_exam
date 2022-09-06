@@ -3,6 +3,10 @@ import { Request, Response } from "express";
 
 export const getUsers = async (req: Request, res: Response) => {
     console.log('Trae todos los Usuarios');
+
+    res.json({
+        msg: 'getUser'
+    });
 } 
 
 export const getUser = async (req: Request, res: Response) => {

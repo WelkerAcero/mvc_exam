@@ -1,11 +1,25 @@
 import App from './app';
+
 import { ProductModel } from './App/Models/ProductModel';
+import Connection from './App/DB/connection';
+import userRoutes from './App/routes/user';
+
+import userBanRoutes from './App/routes/userBan';
+import commentRoutes from './App/routes/comments';
+import productRoutes from './App/routes/product';
 
 class Server extends App {
     private _PORT: number = this.app.get('PORT')
 
-    listen() {
-        this.app.listen(this._PORT, () => {
+    routes() {
+        this.app.use(userRoutes);
+        this.app.use(userBanRoutes);
+        this.app.use(commentRoutes);
+        this.app.use(productRoutes);
+    }
+
+    listen(){
+        this.app.listen(this._PORT, ()=> {
             console.log('listening on port ' + this._PORT)
         })
     }
@@ -13,9 +27,7 @@ class Server extends App {
 
 const ser = new Server();
 
-const obj = new ProductModel();
-
-obj.get_data("SELECT * FROM system.local");
-
-
+const db = new Connection()
+db.listen()
 ser.listen()
+ser.routes()

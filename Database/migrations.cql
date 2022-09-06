@@ -43,7 +43,7 @@ INSERT INTO mvc_exam.users(
     lastname,
     age INT,
 ) VALUES (
-    UUID()
+    UUID(),
     'EXAMEN',
     'BACKEND',
     25

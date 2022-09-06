@@ -63,10 +63,16 @@ docker run --name cassandra -p 9042:9042 cassandra:latest
   - [x] Rutas
 ###### Mishell 
   - [x] Modelado base de datos
+  - [x] Diagrama MVC
   - [x] Estructuración Readme
 
 ## Diagrama de directorios (MVC)
 
+![casssandra](mvc.png)
+
 ## Diagrama de datos NoSQL
+
+![casssandra](cassandra.png)
+
 
 
