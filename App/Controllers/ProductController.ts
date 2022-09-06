@@ -21,8 +21,9 @@ export const getProduct = async (req: Request, res: Response) => {
 export const postProduct = async (req: Request, res: Response) => {
     
     const { body } = req;
-    let bringData = obj.put_data("INSERT INTO mvc_exam.articles (campos articles) VALUES (" + `${body.name}` + ", " + `${body.lastname}` + ", " + `${body.age}` + ") ");
-    return res.json({ bringData }); }
+    let bringData = obj.put_data(`INSERT INTO mvc_exam.articles(idUser,idArticle,name,description) VALUES (UUID(),UUID(),${ req.body.name }, ${ req.body.description });`);
+    return res.json({ bringData });
+}
 
 export const putProduct = async (req: Request, res: Response) => {
 

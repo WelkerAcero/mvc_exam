@@ -41,12 +41,24 @@ INSERT INTO mvc_exam.users(
     idUser,
     name,
     lastname,
-    age INT,
+    age,
 ) VALUES (
     UUID(),
     'EXAMEN',
     'BACKEND',
     25
+);
+
+INSERT INTO mvc_exam.articles(
+    idUser,
+    idArticle,
+    name,
+ 	description
+) VALUES (
+    UUID(),
+    UUID(),
+    'EXAMEN',
+    'BACKEND'
 );
 
 
