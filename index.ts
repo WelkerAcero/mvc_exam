@@ -1,42 +1,18 @@
-import express from "express";
-import { ProductModel } from "./App/Models/ProductModel";
+import App from './app';
+import Connection from './App/DB/connection';
 
-let obj = new ProductModel();
-const app = express();
+class Server extends App {
+    private _PORT:number = this.app.get('PORT')
 
-app.use(express.json())
+    listen(){
+        this.app.listen(this._PORT, ()=> {
+            console.log('listening on port ' + this._PORT)
+        })
+    }
+}
 
-app.get('/', async (req, res) => {
-    /* console.log('Page index'); */
-    let data = await obj.get_data("QUERY");
-    res.send(data);
-})
+const ser = new Server();
 
-app.get('/products', (req, res) => {
-
-    //Query a database
-    //Process data
-    //Validate data
-
-    res.send('Product list')
-})
-
-app.post('/products', (req, res) => {
-    res.send('Creating products')
-})
-
-app.put('/products', (req, res) => {
-    res.send('Updating products')
-})
-
-app.delete('/products', (req, res) => {
-    res.send('Deleted product')
-})
-
-app.patch('/products', (req, res) => {
-    res.send('Updating a part of the product')
-})
-
-app.listen(3000, () => {
-    console.log("Initialization server");
-})
+const db = new Connection()
+db.listen()
+ser.listen()
