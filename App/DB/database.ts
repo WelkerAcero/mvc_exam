@@ -3,8 +3,6 @@ import dotenv from 'dotenv'
 
 dotenv.config();
 
-
-
 class Database{
 
     private _authProvider = new cassandra.auth.PlainTextAuthProvider('', '');// user and password
