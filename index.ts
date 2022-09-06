@@ -12,6 +12,7 @@ class Server extends App {
 }
 
 const ser = new Server();
+
 const db = new Connection()
 db.listen()
 ser.listen()
