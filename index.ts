@@ -1,11 +1,11 @@
 import App from './app';
-import Connection from './App/DB/connection';
+import { ProductModel } from './App/Models/ProductModel';
 
 class Server extends App {
-    private _PORT:number = this.app.get('PORT')
+    private _PORT: number = this.app.get('PORT')
 
-    listen(){
-        this.app.listen(this._PORT, ()=> {
+    listen() {
+        this.app.listen(this._PORT, () => {
             console.log('listening on port ' + this._PORT)
         })
     }
@@ -13,6 +13,8 @@ class Server extends App {
 
 const ser = new Server();
 
-const db = new Connection()
-db.listen()
+const obj = new ProductModel();
+obj.get_data("SELECT * FROM system.local");
+
+
 ser.listen()
