@@ -33,16 +33,16 @@ export const postProduct = async (req: Request, res: Response) => {
 
 export const putProduct = async (req: Request, res: Response) => {
 
-    const { id } = req.params;
-    const { body } = req;
-
-    console.log('actualiza un producto');
+    const id  = req.params.id;
+    const bod = req.body;
+    let deleted = obj.get_data(`UPDATE mvc_exam.articles SET name = '${bod.name}', description = '${bod.description}' WHERE idArticle = ${id} AND iduser = ${bod.iduser};`);
+    return res.json('Se actualizó el articulo ' + id)
 }
 
 export const deleteProduct = async (req: Request, res: Response) => {
 
     const id  = req.params.id;
     let deleted = obj.get_data(`DELETE FROM mvc_exam.articles WHERE idArticle = ${id}`);
-    return res.json('Se elimino el articulo' + id)
+    return res.json('Se eliminó el articulo' + id)
 }
 

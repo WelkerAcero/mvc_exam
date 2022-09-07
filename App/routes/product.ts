@@ -10,7 +10,7 @@ const parse = body.json() //Creado para poder usar el body
 router.get('/product/', parse, getProducts);
 router.get('/product/:id', parse, getProduct);
 router.post('/product/', parse, postProduct);
-router.put('/product/:id', putProduct);
+router.put('/product/:id', parse, putProduct);
 router.delete('/product/:id', deleteProduct);
 
 

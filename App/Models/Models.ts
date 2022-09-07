@@ -9,7 +9,7 @@ export abstract class Model {
     /*private static db_port: number = 3000;*/
     private static db_user: string = "";
     private static db_pass: string = "";
-    private static db_name: string = "mvc-exam";
+    private static db_name: string = "mvc_exam";
     private static db_sucursal: string = "datacenter1";
 
     private _contactPoints = [process.env.CASSANDRA_POINT || Model.db_host]; //localhost
