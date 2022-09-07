@@ -13,6 +13,7 @@ class Server extends App {
 
     routes() {
 
+       
         this.app.use(userRoutes);
         this.app.use(userBanRoutes);
         this.app.use(commentRoutes);

@@ -5,9 +5,9 @@ import body from 'body-parser'
 let obj = new ModelQuery();
 
 export const getProducts =  async (req: Request, res: Response) => {
-    // return obj.get_data(body);
-    let bringData = obj.get_data("select * from mvc_exam.articles;");
-     const data = await bringData;
+
+    let bringData = obj.get_data("select * from usersblock;");
+    const data = await bringData;
     console.log(data);
     return res.json(data);
 }
