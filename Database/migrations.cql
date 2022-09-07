@@ -60,4 +60,14 @@ INSERT INTO mvc_exam.articles(
     'BACKEND'
 );
 
+INSERT INTO mvc_exam.usersBlock(
+    idUserBlock,
+    idUser,
+    idArticle
+) VALUES (
+    UUID(),
+    UUID(),
+    UUID()
+);
+
 
