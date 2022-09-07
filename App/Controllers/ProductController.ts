@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { ProductModel } from "../Models/ProductModel";
+import { ModelQuery} from "../Models/ProductModel";
 import body from 'body-parser'
 
-let obj = new ProductModel();
+let obj = new ModelQuery();
 
 export const getProducts =  async (req: Request, res: Response) => {
     // return obj.get_data(body);

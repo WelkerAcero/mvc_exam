@@ -1,6 +1,6 @@
 import App from './app';
 
-import { ProductModel } from './App/Models/ProductModel';
+import { ModelQuery } from './App/Models/ModelQuery';
 import Connection from './App/DB/connection';
 import userRoutes from './App/routes/user';
 
