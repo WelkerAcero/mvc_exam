@@ -28,7 +28,6 @@ export const postProduct = async (req: Request, res: Response) => {
     const bod = req.body;
     
     let bringData = obj.put_data(`INSERT INTO mvc_exam.articles(idUser,idArticle,name,description) VALUES (UUID(),UUID(), '${ bod.name }', '${ bod.description }');`);
-    // let bringData = await obj.put_data(`INSERT INTO mvc_exam.articles(idUser,idArticle,name,description) VALUES (UUID(),UUID(), ${name}, 'Jean');`);
     return res.json(`Se creo correctamente ${bod.name}`);
 }
 
@@ -42,8 +41,8 @@ export const putProduct = async (req: Request, res: Response) => {
 
 export const deleteProduct = async (req: Request, res: Response) => {
 
-    const { id } = req.params;
-
-    console.log('elimina un producto');
+    const id  = req.params.id;
+    let deleted = obj.get_data(`DELETE FROM mvc_exam.articles WHERE idArticle = ${id}`);
+    return res.json('Se elimino el articulo' + id)
 }
 
