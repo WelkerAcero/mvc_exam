@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ModelQuery } from "../Models/ModelQuery";
+import { ModelQuery} from "../Models/ModelQuery";
 import body from 'body-parser'
 
 let obj = new ModelQuery();
@@ -14,8 +14,12 @@ export const getProducts =  async (req: Request, res: Response) => {
 
 export const getProduct = async (req: Request, res: Response) => {
 
-    const { id } = req.params;
-    console.log('Trae un producto');
+    const  id  = req.params.id;
+
+    let bringData = obj.get_data(`select * from mvc_exam.articles where idArticle = ${id};`);
+     const data = await bringData;
+    console.log(data);
+    return res.json(data);
 }
 
 

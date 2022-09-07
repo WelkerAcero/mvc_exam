@@ -4,7 +4,6 @@ import { ModelQuery } from './App/Models/ModelQuery';
 import Connection from './App/DB/connection';
 import userRoutes from './App/routes/user';
 
-
 import userBanRoutes from './App/routes/userBan';
 import commentRoutes from './App/routes/comments';
 import productRoutes from './App/routes/product';

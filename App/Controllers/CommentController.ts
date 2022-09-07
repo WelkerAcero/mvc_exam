@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-
+import { ModelQuery } from "../Models/ModelQuery";
+let obj = new ModelQuery();
 
 export const getComments = async (req: Request, res: Response) => {
     
@@ -18,10 +19,11 @@ export const getComment = async (req: Request, res: Response) => {
 
 export const postComment = async (req: Request, res: Response) => {
     
-    const { idArticle } = req.params;
-    const { body } = req;
-
-    console.log('Insertar un Comentario en un articulo');
+    const idArticle  = req.params.idArticle;
+    const bod = req.body;
+    
+    let bringData = obj.put_data(`INSERT INTO mvc_exam.comments(idComment,idUser,idArticle,comment) VALUES (UUID(),UUID(), UUID(), '${ bod.description }');`);
+    return res.json(`Se creo correctamente ${bod.description}`);
 } 
 
 export const putComment = async (req: Request, res: Response) => {
