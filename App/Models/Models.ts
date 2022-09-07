@@ -43,18 +43,19 @@ export abstract class Model {
     protected async get_query(): Promise<any>  {
         return new Promise((resolve, rejects) => {
             this.db_connection();
-            this.connection.execute(this.query, [], (err: any, rows: any[]) => {
+            this.connection.execute(this.query, [], (err: any, rows: any) => {
                 if (err) {
                     console.error(err)
                     return rejects(err);
                 }
                 
-                console.log('Database Connected...')
-                return resolve(rows);
+                console.log(Object.values(rows['rows']));
+                return Object.values(rows['rows']);
             });
+            this.db_close();
         });
 
-        this.db_close();
+        
     }
 
     protected async set_query(): Promise<any> {
@@ -67,9 +68,10 @@ export abstract class Model {
                 }
                 console.log("Connected database...")
             });
+            this.db_close();
         });
 
-        this.db_close();
+
     }
 
 }
