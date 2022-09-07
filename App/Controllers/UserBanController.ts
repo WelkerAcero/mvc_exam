@@ -15,7 +15,7 @@ export const getUserBan = async (req: Request, res: Response) => {
     //Usuarios bloqueados de un artículo
     const  id  = req.params.id;
 
-    let bringData = obj.get_data(`SELECT * FROM mvc_exam.usersBlock WHERE idArticle = ${id};`);
+    let bringData = obj.get_data(`SELECT * FROM mvc_exam.usersBlock WHERE iduserblock = ${id};`);
     const data = await bringData;
     console.log(data);
     return res.json(data.rows);
@@ -30,15 +30,6 @@ export const postUserBan = async (req: Request, res: Response) => {
     let bringData = obj.put_data(`INSERT INTO mvc_exam.usersBlock(idUserBlock,idUser,idArticle) VALUES (UUID(),UUID(), UUID() );`);
     return res.json(`Se creó correctamente el UserBlock`);
 
-} 
-
-export const putUserBan = async (req: Request, res: Response) => {
-    
-    const { idArticle } = req.params;
-    const { idUser } = req.params;
-    const { body } = req;
-    
-    console.log('actualiza un usuario bandeado de un articulo');
 } 
 
 export const deleteUserBan = async (req: Request, res: Response) => {
