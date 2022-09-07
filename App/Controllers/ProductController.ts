@@ -5,11 +5,8 @@ import body from 'body-parser'
 let obj = new ProductModel();
 
 export const getProducts =  async (req: Request, res: Response) => {
-    const { body } = req;
-
-    
     // return obj.get_data(body);
-    let bringData = obj.get_data("select * from articles;");
+    let bringData = obj.get_data("select * from mvc_exam.articles;");
      const data = await bringData;
     console.log(data);
     return res.json(data);
@@ -17,8 +14,12 @@ export const getProducts =  async (req: Request, res: Response) => {
 
 export const getProduct = async (req: Request, res: Response) => {
 
-    const { id } = req.params;
-    console.log('Trae un producto');
+    const  id  = req.params.id;
+
+    let bringData = obj.get_data(`select * from mvc_exam.articles where idArticle = ${id};`);
+     const data = await bringData;
+    console.log(data);
+    return res.json(data);
 }
 
 

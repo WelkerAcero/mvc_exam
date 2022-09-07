@@ -58,6 +58,6 @@ INSERT INTO mvc_exam.articles(
     UUID(),
     'EXAMEN',
     'BACKEND'
-)
+);
 
 
