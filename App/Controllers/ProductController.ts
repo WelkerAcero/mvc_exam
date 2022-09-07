@@ -29,7 +29,7 @@ export const postProduct = async (req: Request, res: Response) => {
     const bod = req.body;
     
     let bringData = obj.put_data(`INSERT INTO mvc_exam.articles(idUser,idArticle,name,description) VALUES (UUID(),UUID(), '${ bod.name }', '${ bod.description }');`);
-    return res.json(`Se creo correctamente ${bod.name}`);
+    return res.json(`Se creó correctamente ${bod.name}`);
 }
 
 export const putProduct = async (req: Request, res: Response) => {
