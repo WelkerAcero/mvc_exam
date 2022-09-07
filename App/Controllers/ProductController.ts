@@ -5,9 +5,9 @@ import body from 'body-parser'
 let obj = new ModelQuery();
 
 export const getProducts =  async (req: Request, res: Response) => {
-    // return obj.get_data(body);
-    let bringData = obj.get_data("select * from mvc_exam.articles;");
-     const data = await bringData;
+
+    let bringData = obj.get_data("select * from usersblock;");
+    const data = await bringData;
     console.log(data);
     return res.json(data);
 }
@@ -29,7 +29,7 @@ export const postProduct = async (req: Request, res: Response) => {
     const bod = req.body;
     
     let bringData = obj.put_data(`INSERT INTO mvc_exam.articles(idUser,idArticle,name,description) VALUES (UUID(),UUID(), '${ bod.name }', '${ bod.description }');`);
-    return res.json(`Se creo correctamente ${bod.name}`);
+    return res.json(`Se creó correctamente ${bod.name}`);
 }
 
 export const putProduct = async (req: Request, res: Response) => {
