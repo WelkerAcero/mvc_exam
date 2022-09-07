@@ -6,7 +6,7 @@ CREATE KEYSPACE IF NOT EXISTS mvc_exam WITH replication = {
 USE mvc_exam;
 
 CREATE TABLE mvc_exam.articles (
-    idUser UUID
+    idUser UUID,
     idArticle UUID,
     name TEXT,
  	description TEXT,
@@ -41,12 +41,33 @@ INSERT INTO mvc_exam.users(
     idUser,
     name,
     lastname,
-    age INT,
+    age
 ) VALUES (
-    UUID()
+    UUID(),
     'EXAMEN',
     'BACKEND',
     25
+);
+
+INSERT INTO mvc_exam.articles(
+    idUser,
+    idArticle,
+    name,description
+) VALUES (
+    UUID(),
+    UUID(),
+    'EXAMEN',
+    'BACKEND'
+);
+
+INSERT INTO mvc_exam.usersBlock(
+    idUserBlock,
+    idUser,
+    idArticle
+) VALUES (
+    UUID(),
+    UUID(),
+    UUID()
 );
 
 

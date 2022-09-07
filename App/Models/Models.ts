@@ -1,54 +1,75 @@
-import { rejects } from "assert";
-import express from "express";
-import mysql from "mysql";
-import { resolve } from "path";
+import cassandra from 'cassandra-driver';
+import dotenv from 'dotenv';
 
-const app = express();
+dotenv.config();
 
 export abstract class Model {
 
-    private static db_host: string = "localhost";
-    private static db_port: number = 3000;
-    private static db_user: string = "root";
-    private static db_name: string = "pruebamvc";
+    private static db_host: string = "127.0.0.1";
+    /*private static db_port: number = 3000;*/
+    private static db_user: string = "";
     private static db_pass: string = "";
-    private connection: any;
+    private static db_name: string = "mvc_exam";
+    private static db_sucursal: string = "datacenter1";
 
+    private _contactPoints = [process.env.CASSANDRA_POINT || Model.db_host]; //localhost
+    private _authProvider = new cassandra.auth.PlainTextAuthProvider(Model.db_user, Model.db_pass);// user and password
+    private _localDataCenter = process.env.CASSANDRA_DATACENTER || Model.db_sucursal; //number sucursals
+    protected keyspace = process.env.CASSANDRA_KEYSPACE || Model.db_name;
+
+    private connection: any; //Will save connection with DB
     protected query: string = "";
 
-    abstract get_data(userQuery: string): any;
+    abstract get_data(userQuery: string): any; // method abstract inheritance
 
     private async db_connection(): Promise<void> {
 
-        this.connection = mysql.createConnection({
-            host: Model.db_host,
-            /*       port: Model.db_port, */
-            user: Model.db_user,
-            password: Model.db_pass,
-            database: Model.db_name,
+        this.connection = new cassandra.Client({
+            contactPoints: this._contactPoints,
+            authProvider: this._authProvider,
+            localDataCenter: this._localDataCenter,
+            keyspace: this.keyspace
         });
 
         /* app.listen(Model.db_port); */
-        this.connection.connect();
+        return this.connection;
     }
 
     private async db_close(): Promise<void> {
-        this.connection.end();
+        this.connection.shutdown();
     }
 
-    protected async get_query(): Promise<any> {
+
+    protected async get_query(): Promise<any>  {
         return new Promise((resolve, rejects) => {
-            this.db_connection()
-            this.connection.query(this.query, function (err: any, rows: any[], fields: any) {
+            this.db_connection();
+            this.connection.execute(this.query, [], (err: any, rows: any[]) => {
                 if (err) {
                     console.error(err)
                     return rejects(err);
                 }
-                console.log(rows)
+                
+                console.log('Database Connected...')
                 return resolve(rows);
             });
-        })
+            this.db_close();
+        });
 
+        
+    }
+
+    protected async set_query(): Promise<any> {
+        return new Promise((resolve, rejects) => {
+            this.db_connection();
+            this.connection.execute(this.query, [], (err: any) => {
+                if (err) {
+                    console.error(err)
+                    return rejects(err);
+                }
+                console.log("Connected database...")
+            });
+            this.db_close();
+        });
     }
 
 }
