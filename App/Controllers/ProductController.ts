@@ -9,7 +9,7 @@ export const getProducts =  async (req: Request, res: Response) => {
     let bringData = obj.get_data("select * from usersblock;");
     const data = await bringData;
     console.log(data);
-    return res.json(data);
+    return res.json(data.rows);
 }
 
 export const getProduct = async (req: Request, res: Response) => {
@@ -19,7 +19,7 @@ export const getProduct = async (req: Request, res: Response) => {
     let bringData = obj.get_data(`select * from mvc_exam.articles where idArticle = ${id};`);
      const data = await bringData;
     console.log(data);
-    return res.json(data);
+    return res.json(data.rows);
 }
 
 

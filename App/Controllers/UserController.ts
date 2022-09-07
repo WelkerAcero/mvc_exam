@@ -9,7 +9,7 @@ export const getUsers = async (req: Request, res: Response) => {
     let bringData = obj.get_data("SELECT * FROM mvc_exam.users;");
     const data = await bringData;
     console.log(data);
-    return res.json(data);
+    return res.json(data.rows);
 } 
 
 export const getUser = async (req: Request, res: Response) => {
@@ -19,7 +19,7 @@ export const getUser = async (req: Request, res: Response) => {
     let bringData = obj.get_data(`SELECT * FROM mvc_exam.users WHERE idUser = ${id};`);
     const data = await bringData;
     console.log(data);
-    return res.json(data);
+    return res.json(data.rows);
 } 
 
 export const postUser = async (req: Request, res: Response) => {

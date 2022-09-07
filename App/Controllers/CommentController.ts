@@ -7,7 +7,7 @@ export const getComments = async (req: Request, res: Response) => {
     let bringData = obj.get_data(`select * from mvc_exam.comments;`);
      const data = await bringData;
     console.log(data);
-    return res.json(data);
+    return res.json(data.rows);
 } 
 
 export const getComment = async (req: Request, res: Response) => {
@@ -19,7 +19,7 @@ export const getComment = async (req: Request, res: Response) => {
     let bringData = obj.get_data(`select * from mvc_exam.comments where idArticle = ${idArticle} and idComment = ${idComment} and idUser = ${idUser};`);
     const data = await bringData;
     console.log(data);
-    return res.json(data);
+    return res.json(data.rows);
 } 
 
 export const postComment = async (req: Request, res: Response) => {

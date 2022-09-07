@@ -9,6 +9,6 @@ router.get('/userban/', parse, getUsersBan);
 router.get('/userban/:idArticle',parse, getUserBan);
 router.post('/userban',parse, postUserBan);
 router.put('/userban/:idArticle/:idUser',parse, putUserBan);
-router.delete('/userban/:idArticle/:idUser',parse, deleteUserBan);
+router.delete('/userban/:idUserBlock',parse, deleteUserBan);
 
 export default router;

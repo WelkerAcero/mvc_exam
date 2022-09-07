@@ -8,7 +8,7 @@ export const getUsersBan =  async (req: Request, res: Response) => {
     let bringData = obj.get_data("select * from mvc_exam.usersBlock;");
     const data = await bringData;
     console.log(data);
-    return res.json(data);
+    return res.json(data.rows);
 }
 
 export const getUserBan = async (req: Request, res: Response) => {
@@ -18,7 +18,7 @@ export const getUserBan = async (req: Request, res: Response) => {
     let bringData = obj.get_data(`SELECT * FROM mvc_exam.usersBlock WHERE idArticle = ${id};`);
     const data = await bringData;
     console.log(data);
-    return res.json(data);
+    return res.json(data.rows);
     
 } 
 
@@ -28,7 +28,7 @@ export const postUserBan = async (req: Request, res: Response) => {
    
     const bod = req.body;
     let bringData = obj.put_data(`INSERT INTO mvc_exam.usersBlock(idUserBlock,idUser,idArticle) VALUES (UUID(),UUID(), UUID() );`);
-    return res.json(`Se creó correctamente`);
+    return res.json(`Se creó correctamente el UserBlock`);
 
 } 
 
@@ -43,11 +43,9 @@ export const putUserBan = async (req: Request, res: Response) => {
 
 export const deleteUserBan = async (req: Request, res: Response) => {
     
-    const { id } = req.params;
-    const { idUser } = req.params;
+    const  idUserBlock  = req.params.idUserBlock;
 
-
-    
-    console.log('elimina un usuario bandeado de un articulo');
+    obj.get_data(`DELETE FROM mvc_exam.usersBlock WHERE idUserBlock = ${idUserBlock}`);
+    return res.json('Se eliminó el articulo' + idUserBlock)
 } 
 
