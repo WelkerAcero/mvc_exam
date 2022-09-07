@@ -3,45 +3,50 @@ import { ModelQuery } from "../Models/ModelQuery";
 let obj = new ModelQuery();
 
 export const getComments = async (req: Request, res: Response) => {
-    
-    const { idArticle } = req.params;
-    
-    console.log('Trae todos los comentarios de un articulo en especifico');
+        
+    let bringData = obj.get_data(`select * from mvc_exam.comments;`);
+     const data = await bringData;
+    console.log(data);
+    return res.json(data);
 } 
 
 export const getComment = async (req: Request, res: Response) => {
     
-    const { idArticle } = req.params;
-    const { idUser } = req.params;
+    const  idArticle  = req.params.idArticle;
+    const idComment  = req.params.idComment;
+    const idUser = req.params.idUser;
     
-    console.log('Trae un Comentario de un usuario en especifico');
+    let bringData = obj.get_data(`select * from mvc_exam.comments where idArticle = ${idArticle} and idComment = ${idComment} and idUser = ${idUser};`);
+    const data = await bringData;
+    console.log(data);
+    return res.json(data);
 } 
 
 export const postComment = async (req: Request, res: Response) => {
     
-    const idArticle  = req.params.idArticle;
     const bod = req.body;
     
-    let bringData = obj.put_data(`INSERT INTO mvc_exam.comments(idComment,idUser,idArticle,comment) VALUES (UUID(),UUID(), UUID(), '${ bod.description }');`);
-    return res.json(`Se creo correctamente ${bod.description}`);
+    obj.put_data(`INSERT INTO mvc_exam.comments(idComment,idUser,idArticle,comment) VALUES (UUID(),UUID(), UUID(), '${ bod.comment }');`);
+    return res.json(`Se creo correctamente ${bod.comment}`);
 } 
 
 export const putComment = async (req: Request, res: Response) => {
     
-    const { idArticle } = req.params;
-    const { idComment } = req.params;
-    const { body } = req;
+    const  idArticle  = req.params.idArticle;
+    const  idComment  = req.params.idComment;
+    const idUser = req.params.idUser;
+
+    const bod = req.body;
     
-    console.log('actualiza un Comentario de un articulo');
+    obj.get_data(`UPDATE mvc_exam.comments SET comment = '${bod.comment}' WHERE idArticle = ${idArticle} AND idComment = ${idComment} and idUser = ${idUser};`);
+    return res.json(`Se actualizo correctamente ${bod.comment}`);
 } 
 
 export const deleteComment = async (req: Request, res: Response) => {
     
-    const { id } = req.params;
-    const { idComment } = req.params;
+    const  idComment  = req.params.idComment;
 
-
-    
-    console.log('elimina un Comentario de un articulo');
+    obj.get_data(`DELETE FROM mvc_exam.comments WHERE idComment = ${idComment}`);
+    return res.json('Se eliminó el articulo' + idComment)
 } 
 

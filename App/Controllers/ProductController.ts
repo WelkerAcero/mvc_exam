@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ModelQuery} from "../Models/ProductModel";
+import { ModelQuery} from "../Models/ModelQuery";
 import body from 'body-parser'
 
 let obj = new ModelQuery();
