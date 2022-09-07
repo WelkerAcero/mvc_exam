@@ -2,8 +2,9 @@ import Database from './database';
 
 class Connection {
 
-    private _query = 'SELECT now() FROM system.local';
-    private _db = new Database();
+
+    private _query = `SELECT * FROM system.local`;
+    protected _db = new Database();
 
     listen(){
         this._db.create.execute(this._query, [], (err:any, res:any) => {
