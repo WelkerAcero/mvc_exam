@@ -1,6 +1,6 @@
 import { Model } from "./Models";
 
-export class ProductModel extends Model {
+export class ModelQuery extends Model {
 
     async get_data(userQuery: string) {
         this.query = userQuery;

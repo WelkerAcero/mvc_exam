@@ -1,16 +1,13 @@
 import { Request, Response } from "express";
-import { ProductModel } from "../Models/ProductModel";
+import { ModelQuery } from "../Models/ModelQuery";
 import body from 'body-parser'
 
-let obj = new ProductModel();
+let obj = new ModelQuery();
 
 export const getProducts =  async (req: Request, res: Response) => {
-    const { body } = req;
 
-    
-    // return obj.get_data(body);
-    let bringData = obj.get_data("select * from articles;");
-     const data = await bringData;
+    let bringData = obj.get_data("select * from usersblock;");
+    const data = await bringData;
     console.log(data);
     return res.json(data);
 }

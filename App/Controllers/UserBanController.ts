@@ -1,19 +1,25 @@
 import { Request, Response } from "express";
+import { ModelQuery } from "../Models/ModelQuery";
 
+let obj = new ModelQuery();
 
 export const getUsersBan = async (req: Request, res: Response) => {
     
-    const { idArticle } = req.params;
+    let bringData = obj.get_data("select * from articles;");
+    const data = await bringData;
+    console.log(data);
+    return res.json(data);
     
-    console.log('Trae todos los usuarios baneados de un articulo');
 } 
 
 export const postUserBan = async (req: Request, res: Response) => {
     
-    const { idArticle } = req.params;
-    const { body } = req;
+   
+    const bod = req.body;
+    
+    let bringData = obj.put_data(`INSERT INTO mvc_exam.articles(idUser,idArticle,name,description) VALUES (UUID(),UUID(), '${ bod.name }', '${ bod.description }');`);
+    return res.json(`Se creo correctamente ${bod.name}`);
 
-    console.log('Insertar un usuario bandeado en un articulo');
 } 
 
 export const putUserBan = async (req: Request, res: Response) => {

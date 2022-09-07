@@ -1,10 +1,9 @@
 import App from './app';
 
-import { ProductModel } from './App/Models/ProductModel';
+import { ModelQuery } from './App/Models/ModelQuery';
 import Connection from './App/DB/connection';
 import userRoutes from './App/routes/user';
 
-import Rutas from './App/Controllers/Prueba'
 
 import userBanRoutes from './App/routes/userBan';
 import commentRoutes from './App/routes/comments';
@@ -15,7 +14,7 @@ class Server extends App {
 
     routes() {
 
-        this.app.use(Rutas)
+       
         this.app.use(userRoutes);
         this.app.use(userBanRoutes);
         this.app.use(commentRoutes);
