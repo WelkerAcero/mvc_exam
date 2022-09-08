@@ -43,13 +43,13 @@ export abstract class Model {
     protected async get_query(): Promise<any>  {
         return new Promise((resolve, rejects) => {
             this.db_connection();
-            this.connection.execute(this.query, [], (err: any, rows: any[]) => {
+            this.connection.execute(this.query, [], (err: any, rows: any) => {
                 if (err) {
                     console.error(err)
                     return rejects(err);
                 }
                 
-                console.log('Database Connected...')
+                console.log(Object.values(rows['rows']));
                 return resolve(rows);
             });
             this.db_close();
