@@ -8,7 +8,14 @@ export default class MyServer extends ProductController{
     private _app: Express = express();
     private _port: number = this._app.get('PORT') || 3000
 
-    routes() {
+    constructor() {
+
+        super()
+        this._app.use(express.json());
+        
+    }
+
+    routes() {      
    /*      this._app.use(userRoutes);
         this._app.use(userBanRoutes);
         this._app.use(commentRoutes); */
