@@ -1,4 +1,4 @@
-import { Model } from "./Models";
+import { Model } from "./Model";
 
 export class ModelQuery extends Model {
 

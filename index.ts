@@ -1,38 +1,29 @@
-import App from './app';
+import express, { Express } from 'express';
 
-import { ModelQuery } from './App/Models/ModelQuery';
-import Connection from './App/DB/connection';
 import userRoutes from './App/routes/user';
-
 import userBanRoutes from './App/routes/userBan';
 import commentRoutes from './App/routes/comments';
 import productRoutes from './App/routes/product';
 
-class Server extends App {
-    private _PORT: number = this.app.get('PORT')
+export default class MyServer{
+
+    private _app: Express = express();
+    private _port: Express = this._app.set('PORT', 3000);
 
     routes() {
-
-       
-        this.app.use(userRoutes);
-        this.app.use(userBanRoutes);
-        this.app.use(commentRoutes);
-        this.app.use(productRoutes);
-        
+        this._app.use(userRoutes);
+        this._app.use(userBanRoutes);
+        this._app.use(commentRoutes);
+        this._app.use(productRoutes);
     }
 
-    listen(){
-
-
-        this.app.listen(this._PORT, ()=> {
-            console.log('listening on port ' + this._PORT)
-        })
+    listen() {
+        this._app.listen(this._port, () => {
+            console.log('listening on port ' + this._port)
+        });
     }
 }
 
-const ser = new Server();
-
-const db = new Connection()
-db.listen()
-ser.listen()
-ser.routes()
+const server = new MyServer();
+server.listen()
+server.routes()

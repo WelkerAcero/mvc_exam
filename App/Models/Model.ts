@@ -31,8 +31,8 @@ export abstract class Model {
             keyspace: this.keyspace
         });
 
-        /* app.listen(Model.db_port); */
         return this.connection;
+
     }
 
     private async db_close(): Promise<void> {
@@ -48,14 +48,12 @@ export abstract class Model {
                     console.error(err)
                     return rejects(err);
                 }
-                
+                console.log("Database has been connected :)");
                 console.log(Object.values(rows['rows']));
                 return resolve(rows);
             });
             this.db_close();
         });
-
-        
     }
 
     protected async set_query(): Promise<any> {
@@ -66,14 +64,12 @@ export abstract class Model {
                     console.error(err)
                     return rejects(err);
                 }
-                console.log("Connected database...")
+                console.log("Database connected...")
             });
             this.db_close();
         });
     }
 
+    
+
 }
-
-/* CRUD
-
-*/
